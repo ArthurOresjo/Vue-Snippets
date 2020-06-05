@@ -4,6 +4,9 @@
     <div class="latest-btn-container">
       <button class="show-latest-button" @click="getLatestSnippet">Get latest snippets!</button>
     </div>
+    <div class="latest-btn-container">
+      <button class="show-latest-button" @click="getBestSnippets">Get best snippet!</button>
+    </div>
     <div v-if="model">
       <div class="latest-container" v-for="item in model" :key="item.id">
         <div class="latest-body">
@@ -13,9 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="latest-btn-container">
-      <button class="show-latest-button" @click="getBestSnippets">Get best snippet!</button>
-    </div>
+   
      <div v-if="model">
       <div class="latest-container" v-for="item in model" :key="item.id">
         <div class="latest-body">
