@@ -1,10 +1,22 @@
 <template>
   <div>
-    <h1>See latest snippets</h1>
+    <h1>See latest or best snippets</h1>
     <div class="latest-btn-container">
       <button class="show-latest-button" @click="getLatestSnippet">Get latest snippets!</button>
     </div>
     <div v-if="model">
+      <div class="latest-container" v-for="item in model" :key="item.id">
+        <div class="latest-body">
+          <p class="latest-title">Title: {{item.title}}</p>
+          <p>Snippet: {{item.content}}</p>
+          <p class="item-id">ID: {{item.id}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="latest-btn-container">
+      <button class="show-latest-button" @click="getBestSnippets">Get best snippet!</button>
+    </div>
+     <div v-if="model">
       <div class="latest-container" v-for="item in model" :key="item.id">
         <div class="latest-body">
           <p class="latest-title">Title: {{item.title}}</p>
@@ -18,6 +30,7 @@
 
 <script>
 const baseUrl = "https://www.forverkliga.se/JavaScript/api/api-snippets.php";
+
 
 export default {
   data: () => ({
@@ -35,9 +48,26 @@ export default {
       } catch (error) {
         console.log("Something went wrong", error);
       }
+    },
+    async getBestSnippets() {
+      try {
+         let response = await this.$http.get(baseUrl, {
+          params: { best: "" }
+        });
+
+        this.model = response.data;
+        console.log(response.data);
+      }
+         catch (error) {
+        console.log("Something went wrong", error);
+      }
+     }
+    
+    
     }
+
   }
-};
+
 </script>
 
 <style scoped>
